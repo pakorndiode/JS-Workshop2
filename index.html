@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+    <style>
+        body{
+            color: blue;
+            background-color: yellow;
+        }
+        img{
+            width: 600px;
+            height: 100%;
+        }
+    </style>
+</head>
+<body onload="y()">
+    <div class="blox" style="display: flex; justify-content: center;">
+        <label id="output" style="font-family: 'Segoe UI';"></label>
+    </div>
+    <script>
+    function x (){
+        axios.get('https://reqres.in/api/users/5')
+        .then((res) => {
+            console.log(res.data)
+            document.getElementById('output').innerHTML =
+                ` <img src="${res.data.data.avatar}" alt="proflie" width="200">
+                  <h4>${res.data.data.first_name}  ${res.data.data.last_name}</h4>
+                  <h4>${res.data.data.email}</h4>
+                `
+        }).catch((err) => {
+            console.log('error',error)
+        });
+    }
+    async function y (){
+    try{
+        let response = await axios.get('https://reqres.in/api/users/5')
+        document.getElementById('output').innerHTML =
+                ` <img src="${response.data.data.avatar}" alt="proflie">
+                  <h4>${response.data.data.first_name}  ${response.data.data.last_name}</h4>
+                  <h4>${response.data.data.email}</h4>
+                `
+    }catch(error){
+        console.log('error',error)
+    }
+    }
+    </script>
+
+</body>
+</html>
